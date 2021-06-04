@@ -2,19 +2,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
 float mc_pi(int);
-
 float frandom() {
   long int q = random();
   float ret = (float)q/(float)RAND_MAX;
   return ret;
 }
-
 int main(void) {
   float pi0;
   float pi1;
-  
   pi0 = mc_pi(25000);
   pi1 = mc_pi(25000);
   printf("%f %f\n", pi0, pi1);
@@ -27,9 +23,7 @@ int main(void) {
   if (fabs(pi0 - pi1) > 0.05) {
       printf("Two separate estimates %f and %f are too different.\n", pi0, pi1);
       abort();
-  }
-
-    
+  }   
   for (int i=2000; i<5000; i++) {
     pi0 = mc_pi(i);
     if (!(fabs(pi0 - M_PI) < 0.4)) {
@@ -38,6 +32,23 @@ int main(void) {
     }
   }
 }
-
-
-
+float mc_pi(int n)
+{   float t,x,y;
+    int within=0;
+    int outside=0;
+    int totalpoints=0;
+    for(int i=0;i<=n;i++)
+    {  x=frandom();
+       y=frandom();
+       t=(x*x)+(y*y);
+       if(t<=1)
+       {  within++;
+       }
+       else
+       {  outside++;
+       }
+    }
+    totalpoints= within+ outside; 
+    float pi = 4*(float)within/totalpoints;
+    return pi;
+}
