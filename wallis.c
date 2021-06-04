@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
 float wallis_pi(int);
-
 int main(void) {
   float pi;
   for (int i=0; i<5; i++) {
@@ -14,7 +12,6 @@ int main(void) {
       abort();
     }
   }
-
   for (int i=500; i<3000; i++) {
     pi = wallis_pi(i);
     if (!(fabs(pi - M_PI) < 0.01)) {
@@ -23,13 +20,14 @@ int main(void) {
     }
   }
 }
-float wallis_pi(int i)
-{
-    float pi;
-    for(int j=1; j<=i;j++)
-    { 
-        float s = j*j;
-         pi= pi*2*((4*s) / (( 4*s)-1));
-    }
-    return pi;
+float wallis_pi(int n)
+{ 
+  float pi=1.0;
+  float a;
+   for(int i=1;i<=n;i++)
+   {  a=(float)(4*i*i)/((4*i*i)-1);
+      pi=pi*a;
+   } 
+  pi=pi*2;
+   return pi;
 }
