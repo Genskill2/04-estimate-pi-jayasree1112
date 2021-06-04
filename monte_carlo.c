@@ -38,7 +38,7 @@ float mc_pi(int n)
     for(int i=0;i<=n;i++)
     {  a=frandom();
        b=frandom();
-       t=(x*x)+(y*y);
+       t=(a*a)+(b*b);
        if(t<=1)
        {  withinthecircle++;
        }
