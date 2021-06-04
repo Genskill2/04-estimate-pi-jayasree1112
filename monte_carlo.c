@@ -14,16 +14,14 @@ int main(void) {
   pi0 = mc_pi(25000);
   pi1 = mc_pi(25000);
   printf("%f %f\n", pi0, pi1);
-  
   if (pi0 == pi1) {
       printf("Two separate estimates of pi are exactly the same. This is unlikely.\n");
       abort();
     }
-
   if (fabs(pi0 - pi1) > 0.05) {
       printf("Two separate estimates %f and %f are too different.\n", pi0, pi1);
       abort();
-  }   
+  }
   for (int i=2000; i<5000; i++) {
     pi0 = mc_pi(i);
     if (!(fabs(pi0 - M_PI) < 0.4)) {
@@ -33,22 +31,22 @@ int main(void) {
   }
 }
 float mc_pi(int n)
-{   float t,x,y;
-    int within=0;
-    int outside=0;
+{   float t,a,b;
+    int withinthecircle=0;
+    int outsidethecircle=0;
     int totalpoints=0;
     for(int i=0;i<=n;i++)
-    {  x=frandom();
-       y=frandom();
+    {  a=frandom();
+       b=frandom();
        t=(x*x)+(y*y);
        if(t<=1)
-       {  within++;
+       {  withinthecircle++;
        }
        else
-       {  outside++;
+       {  outsidethecircle++;
        }
     }
-    totalpoints= within+ outside; 
-    float pi = 4*(float)within/totalpoints;
+    totalpoints= withinthecircle + outsidethecircle; 
+    float pi=4*(float)withinthecircle/totalpoints;
     return pi;
 }
